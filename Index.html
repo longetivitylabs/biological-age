@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Age Testing | The Oak Age</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@700&display=swap" rel="stylesheet">
+
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js" defer></script>
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="text.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+    
+</head>
+<body>
+    <div class="containers">
+        <div class="hero">
+            <h2>LIFE IS SHORT?</h2>
+            <div class="container">
+                <h1 class="type">We Disagree</h1>
+            </div>
+            <p class="intro-text">Think life has to speed up with age? We test that belief—literally!</p>
+            <p class="intro-text">A simple at-home blood test reveals how fast your body is actually ageing—plus what to do about it.</p>
+        </div>
+
+        <div class="carousels-container">
+            <div class="carousels">
+                <!-- Original Items -->
+                <div class="card"><img src="img/caro 1.png" alt="Carousel 1"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 2.png" alt="Carousel 2"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 3.png" alt="Carousel 3"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 4.png" alt="Carousel 4"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 5.png" alt="Carousel 5"><div class="overlay"></div></div>
+            
+                <!-- Duplicate Items for Seamless Loop -->
+                <div class="card"><img src="img/caro 1.png" alt="Carousel 1"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 2.png" alt="Carousel 2"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 3.png" alt="Carousel 3"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 4.png" alt="Carousel 4"><div class="overlay"></div></div>
+                <div class="card"><img src="img/caro 5.png" alt="Carousel 5"><div class="overlay"></div></div>
+            </div>
+        </div>
+        
+        <div class="mid-text">
+            <span>Track.</span>
+            <span class="action">Act.</span>
+            <span>Re-test.</span>
+        </div>
+    </div>
+
+    <div class="animation-text">
+        <div class="text">
+            <h2>Because if you can measure it,</h2>
+        </div>
+        <div class="wrap">
+            <div class="quote">you can change it.</div>
+        </div>
+    </div>  
+
+    <section class="button-wrapper">
+        <a href="#" class="button">Book test now</a>
+        <p class="info-text">Home collection | <span>7-day report</span> | Real health insights</p>
+    </section>
+
+        <section class="matter">
+            <div class="heading-container">
+                <h2>Why Does it</h2>
+                <div class="quote">matter?</div>
+            </div>
+            <p class="intro-text">Your BioAge could be younger—or older—than your actual age. <span style="color: #0e406b;"> We help you find out.</span></p>
+        </section>
+
+
+        <section class="wrapper py-5 ">
+            <div class="graph">
+                <img src="img/GIF FIN PBO.gif" alt="Graph">
+            </div>
+            <div class="text-content">
+                <p>Chronological age is how long you've lived.</p>
+                <p><strong>Biological Age</strong> is how your body has lived.</p>
+                <p>And if you can measure it, you can change it.</p>
+            </div>
+        </section>
+
+
+    <!-- Start  Quiz -->
+        <section class="containers py-5">
+        <div class="header">
+            <h1>Myth or fact?</h1>
+        </div>    
+            <div class="quiz-containers">
+                <div class="active-card">
+                    <div class="left-panel">
+                        <img src="/api/placeholder/300/300" alt="Person illustration" class="cartoon-img" id="current-image">
+                    </div>
+                    <div class="card-content">
+                        <div id="question-containers" class="question-card">
+                            <h2>Childhood asthma disappears with age</h2>
+                            <p>Select the option to know the answer!</p>
+                            <div class="options">
+                                <div class="radio-option">
+                                    <input type="radio" id="myth" name="answer" value="myth">
+                                    <label for="myth">Myth</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="fact" name="answer" value="fact">
+                                    <label for="fact">Fact</label>
+                                </div>
+                            </div>
+                            <div id="result-container" class="result">
+                                <!-- Result will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="myth-cards">
+                    <div class="myth-card asthma-disappears" data-title="Childhood asthma disappears with age" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While symptoms may improve for some children as they grow, asthma is generally a lifelong condition that requires ongoing management. Many people diagnosed with asthma as children continue to have symptoms into adulthood." data-fact-explanation="In some cases, children with asthma who get proper treatment may experience improvement over time and be less likely to have asthma attacks triggered by certain things, like pollen or dust. However, complete disappearance is rare and most patients need lifelong management." data-image="/api/placeholder/300/300">
+                        <img src="/api/placeholder/300/300" alt="Child with inhaler" class="card-image">
+                        <div class="myth-card-content">
+                            <h3>Childhood asthma disappears with age</h3>
+                        </div>
+                    </div>
+                    <div class="myth-card asthma-life" data-title="Asthma isn't life-threatening" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Asthma can indeed be life-threatening, especially during severe asthma attacks when airways become significantly restricted. While many people with asthma manage their condition well with proper treatment, severe asthma attacks can lead to respiratory failure if not treated promptly." data-fact-explanation="While mild asthma is manageable, severe asthma attacks can be life-threatening if not treated promptly. Approximately 3,500 people die from asthma each year in the United States alone." data-image="/api/placeholder/300/300">
+                        <img src="/api/placeholder/300/300" alt="Person holding chest" class="card-image">
+                        <div class="myth-card-content">
+                            <h3>Asthma isn't life-threatening</h3>
+                        </div>
+                    </div>
+                    <div class="myth-card no-wheezing" data-title="No wheezing means no asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Wheezing is a common symptom of asthma, but not all people with asthma experience wheezing during every episode. Some people with asthma may primarily experience coughing, chest tightness, or shortness of breath." data-fact-explanation="Wheezing is just one symptom of asthma. Other symptoms include persistent cough, shortness of breath, and chest tightness. In very severe asthma attacks, wheezing might not be audible because air movement is too restricted - a dangerous situation known as 'silent chest.'" data-image="/api/placeholder/300/300">
+                        <img src="/api/placeholder/300/300" alt="Person coughing" class="card-image">
+                        <div class="myth-card-content">
+                            <h3>No wheezing means no asthma</h3>
+                        </div>
+                    </div>
+                    <div class="myth-card supplements" data-title="Dietary supplements can treat asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While some dietary supplements claim to help with asthma symptoms, there is limited scientific evidence supporting their effectiveness as a primary treatment. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma." data-fact-explanation="There's inadequate scientific evidence that supplements can effectively treat asthma. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma. Always consult with a healthcare provider before using supplements." data-image="/api/placeholder/300/300">
+                        <img src="/api/placeholder/300/300" alt="Supplement bottles" class="card-image">
+                        <div class="myth-card-content">
+                            <h3>Dietary supplements can treat asthma</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- End  Quiz -->
+
+
+    <!-- Start  At a Glance -->
+
+    <section class="containers py-5">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">At a glance</h2>
+          <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto text-center pb-5">
+            A smart blood test that calculates your <strong>Biological Age</strong>—backed by science, built for people who want more than a basic checkup.
+          </p>          
+        </div>
+            
+            <div class="timelines" id="timeline">
+              <div class="timeline-line"></div>
+              
+              <div class="timeline-item">
+                <div class="timeline-joint"></div>
+                <div class="timeline-content">
+                  <div class="timeline-item-text">
+                    <span class="timeline-icon">📅</span>
+                    Book your test
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-joint"></div>
+                <div class="timeline-content">
+                  <div class="timeline-item-text">
+                    <span class="timeline-icon">🧠</span>
+                    Fill out your questionnaire
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-joint"></div>
+                <div class="timeline-content">
+                  <div class="timeline-item-text">
+                    <span class="timeline-icon">🩸</span>
+                    Blood collected from home
+                  </div>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-joint"></div>
+                <div class="timeline-content">
+                  <div class="timeline-item-text">
+                    <span class="timeline-icon">📄</span>
+                    Report delivered in 7 days
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+     
+    <!-- End  At a Glance-->
+
+    
+
+    <!-- Start What You'll receive -->
+    <div class="containers py-5">
+        <div class="header">
+            <h1>What you'll <span>receive</span></h1>
+            <div class="delivery-badge">
+                <i class="fas fa-calendar-check me-2"></i> Report delivered in 7 days
+            </div>
+            
+            <div class="timeline mt-4">
+                <div class="timeline-progress" id="timelineProgress"></div>
+                <div class="timeline-days">
+                    <div class="timeline-day active">1</div>
+                    <div class="timeline-day">2</div>
+                    <div class="timeline-day">3</div>
+                    <div class="timeline-day">4</div>
+                    <div class="timeline-day">5</div>
+                    <div class="timeline-day">6</div>
+                    <div class="timeline-day">7</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="card-container">
+                    <div class="card-flip">
+                        <div class="card-front">
+                            <div class="feature-icon bg-danger bg-opacity-10 text-danger">
+                                <i class="fas fa-droplet"></i>
+                            </div>
+                            <h3>Certified home blood collection</h3>
+                            
+                        </div>
+                        <div class="card-back">
+                            <p>Your sample is collected by a trained professional—no lab visits, no fuss.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card-container">
+                    <div class="card-flip">
+                        <div class="card-front">
+                            <div class="feature-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h3>A guided health questionnaire</h3>
+                        </div>
+                        <div class="card-back">
+                        <p>Not just form-filling. We ask what matters—so your data tells the full story.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card-container">
+                    <div class="card-flip">
+                        <div class="card-front">
+                            <div class="feature-icon bg-success bg-opacity-10 text-success">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Your Biological Age vs Calendar Age</h3>
+                        </div>
+                        <div class="card-back">
+                        <p>A side-by-side view of how fast your body is ageing, backed by your blood data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card-container">
+                    <div class="card-flip">
+                        <div class="card-front">
+                            <div class="feature-icon bg-secondary bg-opacity-10 text-secondary">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>A smart report with real explanations</h3>
+                        </div>
+                        <div class="card-back">
+                        <p>We break down complex results into language you can actually use.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card-container">
+                    <div class="card-flip">
+                        <div class="card-front">
+                            <div class="feature-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3>Lifestyle-linked recommendations</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>From nutrition to sleep—see which habits could slow your ageing and why.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="cta-section">
+                    <h3>Ready to get started?</h3>
+                    <p>Book your home collection appointment in minutes.</p>
+                    <button class="btn btn-cta"> Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End  What You'll receive -->
+
+      <!-- Bootstrap JS bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+       
+</body>
+</html>
