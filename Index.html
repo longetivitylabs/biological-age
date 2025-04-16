@@ -103,59 +103,58 @@
 
 
     <!-- Start  Quiz -->
-        <section class="containers py-5">
+    <section class="containers">
         <div class="header">
             <h1>Myth or fact?</h1>
-        </div>    
-            <div class="quiz-containers">
-                <div class="active-card">
-                    <div class="left-panel">
-                        <img src="/api/placeholder/300/300" alt="Person illustration" class="cartoon-img" id="current-image">
-                    </div>
-                    <div class="card-content">
-                        <div id="question-containers" class="question-card">
-                            <h2>Childhood asthma disappears with age</h2>
-                            <p>Select the option to know the answer!</p>
-                            <div class="options">
-                                <div class="radio-option">
-                                    <input type="radio" id="myth" name="answer" value="myth">
-                                    <label for="myth">Myth</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="fact" name="answer" value="fact">
-                                    <label for="fact">Fact</label>
-                                </div>
+        </div>
+        <div class="quiz-container">
+            <div class="active-card">
+                <div class="left-panel">
+                    <img src="/api/placeholder/300/300" alt="Person illustration" class="cartoon-img" id="current-image">
+                </div>
+                <div class="card-content">
+                    <div id="question-container" class="question-card">
+                        <h2 id="current-question">Childhood asthma disappears with age</h2>
+                        <p>Select the option to know the answer!</p>
+                        <div class="options">
+                            <div class="radio-option">
+                                <input type="radio" id="myth" name="answer" value="myth">
+                                <label for="myth">Myth</label>
                             </div>
-                            <div id="result-container" class="result">
-                                <!-- Result will be displayed here -->
+                            <div class="radio-option">
+                                <input type="radio" id="fact" name="answer" value="fact">
+                                <label for="fact">Fact</label>
                             </div>
+                        </div>
+                        <div id="result-container" class="result">
+                            <!-- Result will be displayed here -->
                         </div>
                     </div>
                 </div>
-                <div class="myth-cards">
-                    <div class="myth-card asthma-disappears" data-title="Childhood asthma disappears with age" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While symptoms may improve for some children as they grow, asthma is generally a lifelong condition that requires ongoing management. Many people diagnosed with asthma as children continue to have symptoms into adulthood." data-fact-explanation="In some cases, children with asthma who get proper treatment may experience improvement over time and be less likely to have asthma attacks triggered by certain things, like pollen or dust. However, complete disappearance is rare and most patients need lifelong management." data-image="/api/placeholder/300/300">
-                        <img src="/api/placeholder/300/300" alt="Child with inhaler" class="card-image">
-                        <div class="myth-card-content">
-                            <h3>Childhood asthma disappears with age</h3>
-                        </div>
+            </div>
+            <div class="myth-cards">
+                <div class="myth-card" data-title="Childhood asthma disappears with age" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While symptoms may improve for some children as they grow, asthma is generally a lifelong condition that requires ongoing management. Many people diagnosed with asthma as children continue to have symptoms into adulthood." data-fact-explanation="In some cases, children with asthma who get proper treatment may experience improvement over time and be less likely to have asthma attacks triggered by certain things, like pollen or dust. However, complete disappearance is rare and most patients need lifelong management." data-image="/api/placeholder/300/300">
+                    <img src="/api/placeholder/300/300" alt="Child with inhaler" class="card-image">
+                    <div class="myth-card-content">
+                        <h3>Childhood asthma disappears with age</h3>
                     </div>
-                    <div class="myth-card asthma-life" data-title="Asthma isn't life-threatening" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Asthma can indeed be life-threatening, especially during severe asthma attacks when airways become significantly restricted. While many people with asthma manage their condition well with proper treatment, severe asthma attacks can lead to respiratory failure if not treated promptly." data-fact-explanation="While mild asthma is manageable, severe asthma attacks can be life-threatening if not treated promptly. Approximately 3,500 people die from asthma each year in the United States alone." data-image="/api/placeholder/300/300">
-                        <img src="/api/placeholder/300/300" alt="Person holding chest" class="card-image">
-                        <div class="myth-card-content">
-                            <h3>Asthma isn't life-threatening</h3>
-                        </div>
+                </div>
+                <div class="myth-card" data-title="Asthma isn't life-threatening" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Asthma can indeed be life-threatening, especially during severe asthma attacks when airways become significantly restricted. While many people with asthma manage their condition well with proper treatment, severe asthma attacks can lead to respiratory failure if not treated promptly." data-fact-explanation="While mild asthma is manageable, severe asthma attacks can be life-threatening if not treated promptly. Approximately 3,500 people die from asthma each year in the United States alone." data-image="/api/placeholder/300/300">
+                    <img src="/api/placeholder/300/300" alt="Person holding chest" class="card-image">
+                    <div class="myth-card-content">
+                        <h3>Asthma isn't life-threatening</h3>
                     </div>
-                    <div class="myth-card no-wheezing" data-title="No wheezing means no asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Wheezing is a common symptom of asthma, but not all people with asthma experience wheezing during every episode. Some people with asthma may primarily experience coughing, chest tightness, or shortness of breath." data-fact-explanation="Wheezing is just one symptom of asthma. Other symptoms include persistent cough, shortness of breath, and chest tightness. In very severe asthma attacks, wheezing might not be audible because air movement is too restricted - a dangerous situation known as 'silent chest.'" data-image="/api/placeholder/300/300">
-                        <img src="/api/placeholder/300/300" alt="Person coughing" class="card-image">
-                        <div class="myth-card-content">
-                            <h3>No wheezing means no asthma</h3>
-                        </div>
+                </div>
+                <div class="myth-card" data-title="No wheezing means no asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="Wheezing is a common symptom of asthma, but not all people with asthma experience wheezing during every episode. Some people with asthma may primarily experience coughing, chest tightness, or shortness of breath." data-fact-explanation="Wheezing is just one symptom of asthma. Other symptoms include persistent cough, shortness of breath, and chest tightness. In very severe asthma attacks, wheezing might not be audible because air movement is too restricted - a dangerous situation known as 'silent chest.'" data-image="/api/placeholder/300/300">
+                    <img src="/api/placeholder/300/300" alt="Person coughing" class="card-image">
+                    <div class="myth-card-content">
+                        <h3>No wheezing means no asthma</h3>
                     </div>
-                    <div class="myth-card supplements" data-title="Dietary supplements can treat asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While some dietary supplements claim to help with asthma symptoms, there is limited scientific evidence supporting their effectiveness as a primary treatment. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma." data-fact-explanation="There's inadequate scientific evidence that supplements can effectively treat asthma. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma. Always consult with a healthcare provider before using supplements." data-image="/api/placeholder/300/300">
-                        <img src="/api/placeholder/300/300" alt="Supplement bottles" class="card-image">
-                        <div class="myth-card-content">
-                            <h3>Dietary supplements can treat asthma</h3>
-                        </div>
+                </div>
+                <div class="myth-card" data-title="Dietary supplements can treat asthma" data-myth-correct="true" data-fact-correct="false" data-myth-explanation="While some dietary supplements claim to help with asthma symptoms, there is limited scientific evidence supporting their effectiveness as a primary treatment. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma." data-fact-explanation="There's inadequate scientific evidence that supplements can effectively treat asthma. Conventional medical treatments like bronchodilators and anti-inflammatory medications remain the scientifically proven methods for managing asthma. Always consult with a healthcare provider before using supplements." data-image="/api/placeholder/300/300">
+                    <img src="/api/placeholder/300/300" alt="Supplement bottles" class="card-image">
+                    <div class="myth-card-content">
+                        <h3>Dietary supplements can treat asthma</h3>
                     </div>
                 </div>
             </div>

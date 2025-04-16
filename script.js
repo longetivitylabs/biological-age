@@ -178,76 +178,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   const mythCards = document.querySelectorAll('.myth-card');
-  const questionContainer = document.getElementById('question-containers');
+  const questionContainer = document.getElementById('question-container');
   const resultContainer = document.getElementById('result-container');
-  const radioOptions = document.querySelectorAll('input[name="answer"]');
+  const currentQuestion = document.getElementById('current-question');
   const currentImage = document.getElementById('current-image');
+  const radioOptions = document.querySelectorAll('input[name="answer"]');
   
-  // Set up event listeners for myth cards
+  // Color configuration
+  const correctColor = '#4caf50';  // Green for correct answers
+  const incorrectColor = '#f44336'; // Red for incorrect answers
+  
+  // Initialize with first card data
+  if (mythCards.length > 0) {
+      const firstCard = mythCards[0];
+      currentQuestion.textContent = firstCard.dataset.title;
+      currentImage.src = firstCard.dataset.image;
+      currentImage.alt = firstCard.querySelector('.card-image').alt;
+  }
+  
+  // Add click event to all myth cards
   mythCards.forEach(card => {
       card.addEventListener('click', function() {
-          // Update the question text
-          const mythTitle = this.getAttribute('data-title');
-          questionContainer.querySelector('h2').textContent = mythTitle;
-          
-          // Update the image
-          const imageUrl = this.getAttribute('data-image');
-          currentImage.src = imageUrl;
-          
           // Reset radio buttons
-          radioOptions.forEach(radio => {
-              radio.checked = false;
-          });
+          radioOptions.forEach(radio => radio.checked = false);
           
-          // Hide result container
+          // Reset result container
           resultContainer.classList.remove('show');
           resultContainer.innerHTML = '';
           
-          // Update active card styles
-          mythCards.forEach(c => c.classList.remove('active'));
-          this.classList.add('active');
+          // Update question and image
+          currentQuestion.textContent = this.dataset.title;
+          currentImage.src = this.dataset.image;
+          currentImage.alt = this.querySelector('.card-image').alt;
+          
+          // Scroll to top of active card on mobile
+          if (window.innerWidth < 992) {
+              document.querySelector('.active-card').scrollIntoView({
+                  behavior: 'smooth'
+              });
+          }
       });
   });
   
-  // Set up event listeners for radio buttons
+  // Add event listener for radio buttons
   radioOptions.forEach(radio => {
       radio.addEventListener('change', function() {
-          const selectedValue = this.value;
-          const activeCard = document.querySelector('.myth-card.active') || document.querySelector('.myth-card');
+          const selectedCard = Array.from(mythCards).find(
+              card => card.dataset.title === currentQuestion.textContent
+          );
           
-          let isCorrect = false;
-          let explanation = '';
-          
-          if (selectedValue === 'myth') {
-              isCorrect = activeCard.getAttribute('data-myth-correct') === 'true';
-              explanation = activeCard.getAttribute('data-myth-explanation');
-          } else if (selectedValue === 'fact') {
-              isCorrect = activeCard.getAttribute('data-fact-correct') === 'true';
-              explanation = activeCard.getAttribute('data-fact-explanation');
-          }
-          
-          // Create result HTML
-          let resultHTML = '';
-          if (isCorrect) {
-              resultHTML = `
-                  <h3 class="correct">Congratulation, Right Answer!</h3>
+          if (selectedCard) {
+              const isMyth = this.value === 'myth';
+              const isCorrect = isMyth ? 
+                  selectedCard.dataset.mythCorrect === 'true' : 
+                  selectedCard.dataset.factCorrect === 'true';
+              
+              const explanation = isMyth ? 
+                  selectedCard.dataset.mythExplanation : 
+                  selectedCard.dataset.factExplanation;
+              
+              // Show result with colored text
+              resultContainer.innerHTML = `
+                  <div class="congrats" style="color: ${isCorrect ? correctColor : incorrectColor}; font-weight: bold;">
+                      ${isCorrect ? 'Congratulation, Right Answer!' : 'Sorry, that\'s not correct.'}
+                  </div>
                   <p>${explanation}</p>
               `;
-          } else {
-              resultHTML = `
-                  <h3 class="incorrect">Sorry, Wrong Answer!</h3>
-                  <p>${explanation}</p>
-              `;
+              resultContainer.classList.add('show');
           }
-          
-          resultContainer.innerHTML = resultHTML;
-          resultContainer.classList.add('show');
       });
   });
   
-  // Set first card as active by default
-  mythCards[0].classList.add('active');
-  currentImage.src = mythCards[0].getAttribute('data-image');
+  // Prevent default for read more links
+  document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('read-more')) {
+          e.preventDefault();
+      }
+  });
 });
 
 //Quiz End
