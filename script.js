@@ -251,3 +251,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Quiz End
+
+//Start pincode Available
+
+let availablePincodes = [];
+  
+    // Load and transform pincodes from JSON
+    fetch('pincodes.json')
+      .then(response => response.json())
+      .then(data => {
+        // Extract the pincode numbers and convert to strings for comparison
+        availablePincodes = data.map(entry => String(entry.Pincode));
+      })
+      .catch(error => {
+        console.error("Error loading pincodes:", error);
+      });
+  
+    function checkPincode() {
+      const input = document.getElementById("pincodeInput").value.trim();
+      const resultDiv = document.getElementById("result");
+  
+      if (availablePincodes.includes(input)) {
+        resultDiv.innerHTML = `<span class="tick">✔</span><span class="available">Available</span>`;
+      } else {
+        resultDiv.innerHTML = `<span class="unavailable">Sorry, our services are currently unavailable at your pincode.</span>`;
+      }
+    }
+
+//End Pincode Available
