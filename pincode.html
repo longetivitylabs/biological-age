@@ -19,6 +19,7 @@
       --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
       --button-gradient: linear-gradient(135deg, #0E406B, #1e5799);
       --button-hover-gradient: linear-gradient(135deg, #092d4f, #16345c);
+      --checkbox-color: #0E406B;
     }
     
     body {
@@ -137,7 +138,7 @@
     .feature-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
     }
     
     .feature-item {
@@ -153,6 +154,7 @@
       text-align: left;
       animation: featureFadeIn 0.8s forwards;
       opacity: 0;
+      cursor: pointer;
     }
     
     .feature-item:nth-child(1) {
@@ -230,107 +232,60 @@
       color: #555;
     }
     
-    .price-section {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+    .feature-price {
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    
+    /* Custom checkbox styling */
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    
+    .custom-checkbox {
       position: relative;
-      overflow: hidden;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .price-section p {
-      margin: 0;
-      font-size: 16px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-    .price-section p strong {
-      font-size: 16px;
-      color: var(--primary-color);
-    }
-    
-    .price-tag {
-      background: #e6f7ff;
-      color: var(--primary-color);
-      padding: 8px 16px;
-      border-radius: 20px;
       display: inline-block;
-      font-weight: 600;
-      font-size: 18px;
-      box-shadow: 0 2px 8px rgba(14, 64, 107, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .price-tag:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(14, 64, 107, 0.2);
-    }
-    
-    .price-tag::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
-      transform: rotate(30deg);
-      transition: all 0.5s ease;
-    }
-    
-    .price-tag:hover::after {
-      left: 100%;
-      transition: all 0.8s ease;
-    }
-    
-    .addon-option {
-      background: #f8f8f8;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      border: 1px solid #eaeaea;
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .addon-option:hover {
-      transform: scale(1.02);
-      border-color: #ddd;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
-    
-    .addon-price {
-      color: var(--primary-color);
-      font-weight: 500;
-    }
-    
-    label {
-      display: flex;
-      align-items: center;
-      font-weight: 500;
-      color: #333;
+      width: 26px;
+      height: 26px;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 50%;
       cursor: pointer;
-      width: 100%;
-      justify-content: space-between;
+      transition: all 0.3s ease;
     }
     
     input[type="checkbox"] {
-      margin-right: 10px;
-      transform: scale(1.2);
-      accent-color: var(--primary-color);
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    
+    input[type="checkbox"]:checked ~ .custom-checkbox {
+      background-color: var(--checkbox-color);
+      border-color: var(--checkbox-color);
+    }
+    
+    .custom-checkbox:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 9px;
+      top: 5px;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    
+    input[type="checkbox"]:checked ~ .custom-checkbox:after {
+      display: block;
     }
     
     .pincode-section {
@@ -520,6 +475,10 @@
       100% { background-color: #f0f7ff; }
     }
     
+    .selected-feature {
+      border: 2px solid var(--primary-color);
+    }
+    
     /* Responsive design */
     @media (max-width: 768px) {
       .layout-container {
@@ -545,52 +504,51 @@
     <h2>Get Your Body Risk Score</h2>
     
     <div class="layout-container">
-      <!-- Left column with features and pricing -->
+      <!-- Left column with merged feature grid (includes checkboxes) -->
       <div class="left-column">
         <div class="feature-section">
-          <h3>Included</h3>
+          <h3>Choose Your Tests</h3>
+          
           <div class="feature-grid">
-            <div class="feature-item">
+            <label class="feature-item" id="bioAgeFeature" for="addBioAgeing">
               <span class="feature-icon">🧬</span>
               <div class="feature-text">
-                <h4>Biological Age</h4>
-                <p>Know your true body age</p>
+                <h4>Biological Age & Rate of Ageing</h4>
+                <p>Know your true body age and how fast you're aging</p>
               </div>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">🍬</span>
-              <div class="feature-text">
-                <h4>Diabetes Risk</h4>
-                <p>Personalized risk analysis</p>
+              <div class="checkbox-container">
+                <input type="checkbox" id="addBioAgeing" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'bioAgeFeature')">
+                <span class="custom-checkbox"></span>
+                <span class="feature-price">₹2000</span>
               </div>
-            </div>
-            <div class="feature-item">
+            </label>
+            
+            <label class="feature-item" id="diabetesHeartFeature" for="addDiabetesHeart">
               <span class="feature-icon">❤️</span>
               <div class="feature-text">
-                <h4>Heart Risk</h4>
-                <p>Cardiac health evaluation</p>
+                <h4>Diabetes Risk & Heart Risk</h4>
+                <p>Comprehensive cardiac health and diabetes risk evaluation</p>
               </div>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">⏱️</span>
+              <div class="checkbox-container">
+                <input type="checkbox" id="addDiabetesHeart" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'diabetesHeartFeature')">
+                <span class="custom-checkbox"></span>
+                <span class="feature-price">₹2000</span>
+              </div>
+            </label>
+            
+            <label class="feature-item" id="thyroidFeature" for="addThyroid">
+              <span class="feature-icon">⚡</span>
               <div class="feature-text">
-                <h4>Rate of Ageing</h4>
-                <p>How fast you're aging</p>
+                <h4>Thyroid Risk Score</h4>
+                <p>Complete thyroid function assessment</p>
               </div>
-            </div>
+              <div class="checkbox-container">
+                <input type="checkbox" id="addThyroid" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'thyroidFeature')">
+                <span class="custom-checkbox"></span>
+                <span class="feature-price">₹2000</span>
+              </div>
+            </label>
           </div>
-        </div>
-        
-        <div class="price-section">
-          <p><strong>Base Price:</strong> <span class="price-tag">₹3495</span></p>
-        </div>
-
-        <div class="addon-option">
-          <label>
-            <input type="checkbox" id="addThyroid" onchange="updateTotalPrice()" />
-            <span>Add <strong>Thyroid Risk Score</strong></span>
-            <span class="addon-price">+₹2000</span>
-          </label>
         </div>
       </div>
       
@@ -609,7 +567,7 @@
         <!-- Total Price Display -->
         <div class="total-price-section" id="totalPriceSection">
           <h3>Total Price</h3>
-          <p class="total-price" id="totalPrice">₹3495</p>
+          <p class="total-price" id="totalPrice">₹0</p>
         </div>
         
         <button id="bookTestBtn" class="cta-btn float-animation">Book Your Test Now</button>
@@ -621,8 +579,9 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
   const razorpayKey = "rzp_test_1DP5mmOlF5G5ag"; // Razorpay Test Key
-  const basePrice = 3495;
-  const thyroidAddonPrice = 2000;
+  const bioAgeingPrice = 2000;
+  const diabetesHeartPrice = 2000;
+  const thyroidPrice = 2000;
 
   let availablePincodes = [];
   
@@ -654,13 +613,27 @@
     }, 300);
   }
 
+  function toggleFeatureSelection(checkbox, featureId) {
+    const featureElement = document.getElementById(featureId);
+    if (checkbox.checked) {
+      featureElement.classList.add("selected-feature");
+    } else {
+      featureElement.classList.remove("selected-feature");
+    }
+  }
+
   function updateTotalPrice() {
+    const bioAgeingChecked = document.getElementById("addBioAgeing").checked;
+    const diabetesHeartChecked = document.getElementById("addDiabetesHeart").checked;
     const thyroidChecked = document.getElementById("addThyroid").checked;
     const totalPriceElement = document.getElementById("totalPrice");
     const totalPriceSection = document.getElementById("totalPriceSection");
     
     // Calculate total price
-    const total = thyroidChecked ? basePrice + thyroidAddonPrice : basePrice;
+    let total = 0;
+    if (bioAgeingChecked) total += bioAgeingPrice;
+    if (diabetesHeartChecked) total += diabetesHeartPrice;
+    if (thyroidChecked) total += thyroidPrice;
     
     // Update the displayed price
     totalPriceElement.textContent = `₹${total}`;
@@ -669,13 +642,39 @@
     totalPriceSection.classList.remove("price-updated");
     void totalPriceSection.offsetWidth; // Trigger reflow to restart animation
     totalPriceSection.classList.add("price-updated");
+    
+    // Update button status
+    const bookButton = document.getElementById("bookTestBtn");
+    if (total === 0) {
+      bookButton.disabled = true;
+      bookButton.style.opacity = "0.5";
+      bookButton.style.cursor = "not-allowed";
+    } else {
+      bookButton.disabled = false;
+      bookButton.style.opacity = "1";
+      bookButton.style.cursor = "pointer";
+    }
   }
 
   document.getElementById("bookTestBtn").addEventListener("click", () => {
     const pincode = document.getElementById("pincodeInput").value.trim();
+    const bioAgeingChecked = document.getElementById("addBioAgeing").checked;
+    const diabetesHeartChecked = document.getElementById("addDiabetesHeart").checked;
     const thyroidChecked = document.getElementById("addThyroid").checked;
     
     const btn = document.getElementById("bookTestBtn");
+    
+    // Calculate total price to check if any option is selected
+    let total = 0;
+    if (bioAgeingChecked) total += bioAgeingPrice;
+    if (diabetesHeartChecked) total += diabetesHeartPrice;
+    if (thyroidChecked) total += thyroidPrice;
+    
+    if (total === 0) {
+      alert("Please select at least one test option.");
+      return;
+    }
+    
     btn.textContent = "Processing...";
     btn.disabled = true;
     btn.classList.remove("float-animation");
@@ -695,12 +694,15 @@
         return;
       }
 
-      const price = thyroidChecked ? basePrice + thyroidAddonPrice : basePrice;
-      const description = thyroidChecked ? "Body Risk Score + Thyroid" : "Body Risk Score Package";
+      // Build description based on selected options
+      let description = "Body Risk Score:";
+      if (bioAgeingChecked) description += " Biological Age/Ageing Rate";
+      if (diabetesHeartChecked) description += (bioAgeingChecked ? " + " : " ") + "Diabetes/Heart Risk";
+      if (thyroidChecked) description += ((bioAgeingChecked || diabetesHeartChecked) ? " + " : " ") + "Thyroid Risk";
 
       const options = {
         key: razorpayKey,
-        amount: price * 100,
+        amount: total * 100,
         currency: "INR",
         name: "HealthCheck.ai", // Example brand
         description,
@@ -723,17 +725,8 @@
     }, 800);
   });
 
-  // Feature hover interactions
-  document.querySelectorAll('.feature-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const icon = item.querySelector('.feature-icon');
-      icon.style.animation = 'bounce 0.5s';
-      
-      setTimeout(() => {
-        icon.style.animation = '';
-      }, 500);
-    });
-  });
+  // Initialize button state
+  updateTotalPrice();
 </script>
 
 </body>
