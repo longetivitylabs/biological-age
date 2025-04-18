@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Body Risk Score Booking</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="text.css">
   <style>
+    @font-face {
+      font-family: 'Archia-Light';
+      src: url(Archia_Font/Archia-Light.otf);
+    }
     :root {
       --primary-color: #0E406B;
       --secondary-color: #193d3d;
@@ -23,7 +29,6 @@
     }
     
     body {
-      font-family: 'Inter', sans-serif;
       background: var(--bg-gradient);
       padding: 40px 20px;
       display: flex;
@@ -220,7 +225,7 @@
     }
     
     .feature-item h4 {
-      margin: 0 0 5px 0;
+      margin: 0 0 10px 0;
       color: var(--primary-color);
       font-size: 16px;
       font-weight: 600;
@@ -228,6 +233,7 @@
     
     .feature-item p {
       margin: 0;
+      font-family: 'Archia-Light';
       font-size: 14px;
       color: #555;
     }
@@ -324,11 +330,12 @@
       box-shadow: 0 0 0 3px rgba(14, 64, 107, 0.1);
     }
     
-    button.check-btn {
+    .check-btn {
       background-color: #0E406B;
       color: white;
       padding: 12px 20px;
       font-size: 16px;
+      font-family: 'Archia-Light';
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -336,7 +343,7 @@
       width: 100%;
     }
     
-    button.check-btn:hover {
+  .check-btn:hover {
       filter: brightness(1.1);
       transform: translateY(-2px);
     }
@@ -375,6 +382,7 @@
       padding: 18px;
       border: none;
       font-size: 18px;
+      font-family: 'Archia-Medium';
       width: 100%;
       border-radius: 12px;
       margin-top: 24px;
@@ -469,6 +477,7 @@
     .price-updated {
       animation: highlight 1s ease;
     }
+    
     
     @keyframes highlight {
       0% { background-color: #ffeb3b; }
@@ -574,12 +583,6 @@
       </div>
     </div>
   </div>
-
-  <footer class="footer">
-    <div class="copyright">
-      Copyright © 2025 LONGETIVITY LABS PRIVATE LIMITED All Rights Reserved.
-    </div>
-  </footer>
 
   
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

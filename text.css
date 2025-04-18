@@ -12,9 +12,9 @@
     background: -webkit-linear-gradient(25deg, #0e406b68, #0e406b);
     -webkit-background-clip: text;
     font-size: 3rem;
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Archia-medium';
     font-style: italic;
-    font-weight: 500;
+    font-weight: 800;
     margin: 10px 0 30px;
     overflow: hidden;
     white-space: nowrap;
@@ -49,7 +49,7 @@
       h1 {
         max-width: 200px;
         font-size: 2rem;
-        font-family: 'IBM Plex Serif', serif;
+        font-family: 'Archia-medium';
         font-style: italic;
         font-weight: 500;
         margin: 10px 0 30px;
@@ -80,7 +80,7 @@
 /* Default font size for larger screens */
 .quote {
     font-size: 3rem;
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Archia-medium';
     font-style: italic;
     font-weight: 500;
     line-height: 1.2;
@@ -116,7 +116,7 @@
     }
 
     .quote {
-        font-size: 3rem;
+        font-size: 2rem;
         flex-wrap: wrap;
         text-align: center;
     }
@@ -132,7 +132,7 @@
     }
 
     .quote {
-        font-size: 2rem;
+        font-size: 1.9rem;
         gap: 3px;
     }
 }
