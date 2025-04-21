@@ -225,7 +225,7 @@
     }
     
     .feature-item h4 {
-      margin: 0 0 10px 0;
+      margin: 0 0 5px 0;
       color: var(--primary-color);
       font-size: 16px;
       font-weight: 600;
@@ -255,11 +255,11 @@
     .custom-checkbox {
       position: relative;
       display: inline-block;
-      width: 26px;
-      height: 26px;
+      width: 20px;
+      height: 20px;
       background-color: #fff;
       border: 2px solid #ddd;
-      border-radius: 50%;
+      border-radius: 25%;
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -448,7 +448,7 @@
       animation: float 3s ease-in-out infinite;
     }
     
-    /* Total Price Section */
+    /* Billing Summary Section */
     .total-price-section {
       background: #f0f7ff;
       border-radius: 12px;
@@ -488,6 +488,25 @@
       border: 2px solid var(--primary-color);
     }
     
+    /* Added style for pre-selected item */
+    .pre-selected {
+      border: 2px solid var(--primary-color);
+      background-color: var(--feature-color-1);
+      position: relative;
+    }
+    
+    .pre-selected:after {
+      content: "Included";
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: var(--primary-color);
+      color: white;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    
     /* Responsive design */
     @media (max-width: 768px) {
       .layout-container {
@@ -519,18 +538,13 @@
           <h3>Choose Your Tests</h3>
           
           <div class="feature-grid">
-            <label class="feature-item" id="bioAgeFeature" for="addBioAgeing">
+            <div class="feature-item pre-selected" id="bioAgeFeature">
               <span class="feature-icon">🧬</span>
               <div class="feature-text">
                 <h4>Biological Age & Rate of Ageing</h4>
                 <p>Know your true body age and how fast you're aging</p>
               </div>
-              <div class="checkbox-container">
-                <input type="checkbox" id="addBioAgeing" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'bioAgeFeature')">
-                <span class="custom-checkbox"></span>
-                <span class="feature-price">₹2000</span>
-              </div>
-            </label>
+            </div>
             
             <label class="feature-item" id="diabetesHeartFeature" for="addDiabetesHeart">
               <span class="feature-icon">❤️</span>
@@ -573,10 +587,10 @@
           <div id="result" class="result"></div>
         </div>
         
-        <!-- Total Price Display -->
+        <!-- Billing Summary Display -->
         <div class="total-price-section" id="totalPriceSection">
-          <h3>Total Price</h3>
-          <p class="total-price" id="totalPrice">₹0</p>
+          <h3>Billing Summary</h3>
+          <h1 class="total-price" id="totalPrice">₹2000</h1>
         </div>
         
         <button id="bookTestBtn" class="cta-btn float-animation">Book Your Test Now</button>
@@ -593,130 +607,110 @@
   const thyroidPrice = 2000;
 
   let availablePincodes = [];
-  
-  // Load and transform pincodes from JSON
+
+  // Load Pincode List
   fetch('pincodes.json')
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-      // Extract the pincode numbers and convert to strings for comparison
       availablePincodes = data.map(entry => String(entry.Pincode));
     })
-    .catch(error => {
-      console.error("Error loading pincodes:", error);
+    .catch(err => {
+      console.error("Error loading pincodes.json:", err);
     });
-  
+
+  // Check Pincode Availability
   function checkPincode() {
     const input = document.getElementById("pincodeInput").value.trim();
     const resultDiv = document.getElementById("result");
-    
     resultDiv.style.opacity = 0;
-    
+
     setTimeout(() => {
       if (availablePincodes.includes(input)) {
         resultDiv.innerHTML = `<span class="tick">✔</span><span class="available">Available in your area!</span>`;
       } else {
         resultDiv.innerHTML = `<span class="unavailable">Sorry, our services are currently unavailable at your pincode.</span>`;
       }
-      
       resultDiv.style.opacity = 1;
     }, 300);
   }
 
+  // Highlight Selected Feature
   function toggleFeatureSelection(checkbox, featureId) {
-    const featureElement = document.getElementById(featureId);
-    if (checkbox.checked) {
-      featureElement.classList.add("selected-feature");
-    } else {
-      featureElement.classList.remove("selected-feature");
-    }
+    const feature = document.getElementById(featureId);
+    feature.classList.toggle("selected-feature", checkbox.checked);
+    updateTotalPrice();
   }
 
+  // Calculate Total Price
   function updateTotalPrice() {
-    const bioAgeingChecked = document.getElementById("addBioAgeing").checked;
-    const diabetesHeartChecked = document.getElementById("addDiabetesHeart").checked;
-    const thyroidChecked = document.getElementById("addThyroid").checked;
-    const totalPriceElement = document.getElementById("totalPrice");
-    const totalPriceSection = document.getElementById("totalPriceSection");
-    
-    // Calculate total price
-    let total = 0;
-    if (bioAgeingChecked) total += bioAgeingPrice;
-    if (diabetesHeartChecked) total += diabetesHeartPrice;
-    if (thyroidChecked) total += thyroidPrice;
-    
-    // Update the displayed price
-    totalPriceElement.textContent = `₹${total}`;
-    
-    // Add highlight animation
-    totalPriceSection.classList.remove("price-updated");
-    void totalPriceSection.offsetWidth; // Trigger reflow to restart animation
-    totalPriceSection.classList.add("price-updated");
-    
-    // Update button status
-    const bookButton = document.getElementById("bookTestBtn");
-    if (total === 0) {
-      bookButton.disabled = true;
-      bookButton.style.opacity = "0.5";
-      bookButton.style.cursor = "not-allowed";
-    } else {
-      bookButton.disabled = false;
-      bookButton.style.opacity = "1";
-      bookButton.style.cursor = "pointer";
-    }
+    const isDHR = document.getElementById("addDiabetesHeart").checked;
+    const isThyroid = document.getElementById("addThyroid").checked;
+    const totalEl = document.getElementById("totalPrice");
+    const section = document.getElementById("totalPriceSection");
+
+    // Always include bioAgeingPrice as it's mandatory
+    let total = bioAgeingPrice;
+    if (isDHR) total += diabetesHeartPrice;
+    if (isThyroid) total += thyroidPrice;
+
+    totalEl.textContent = `₹${total}`;
+    section.classList.remove("price-updated");
+    void section.offsetWidth;
+    section.classList.add("price-updated");
+
+    const btn = document.getElementById("bookTestBtn");
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.style.cursor = "pointer";
   }
 
+  // Handle Booking Button
   document.getElementById("bookTestBtn").addEventListener("click", () => {
     const pincode = document.getElementById("pincodeInput").value.trim();
-    const bioAgeingChecked = document.getElementById("addBioAgeing").checked;
-    const diabetesHeartChecked = document.getElementById("addDiabetesHeart").checked;
-    const thyroidChecked = document.getElementById("addThyroid").checked;
-    
+    const isDHR = document.getElementById("addDiabetesHeart").checked;
+    const isThyroid = document.getElementById("addThyroid").checked;
     const btn = document.getElementById("bookTestBtn");
-    
-    // Calculate total price to check if any option is selected
-    let total = 0;
-    if (bioAgeingChecked) total += bioAgeingPrice;
-    if (diabetesHeartChecked) total += diabetesHeartPrice;
-    if (thyroidChecked) total += thyroidPrice;
-    
-    if (total === 0) {
-      alert("Please select at least one test option.");
+
+    // Always include bioAgeingPrice as it's mandatory
+    let total = bioAgeingPrice;
+    if (isDHR) total += diabetesHeartPrice;
+    if (isThyroid) total += thyroidPrice;
+
+    if (!pincode) {
+      alert("Please enter your pincode.");
       return;
     }
-    
+
+    if (!availablePincodes.includes(pincode)) {
+      alert("Sorry, we don't serve your location.");
+      return;
+    }
+
     btn.textContent = "Processing...";
     btn.disabled = true;
     btn.classList.remove("float-animation");
-    
+
     setTimeout(() => {
       btn.textContent = "Book Your Test Now";
       btn.disabled = false;
       btn.classList.add("float-animation");
-      
-      if (!pincode) {
-        alert("Please enter your pincode first.");
-        return;
-      }
 
-      if (!availablePincodes.includes(pincode)) {
-        alert("Sorry, we don't serve your location.");
-        return;
-      }
-
-      // Build description based on selected options
+      // Prepare Description
       let description = "Body Risk Score:";
-      if (bioAgeingChecked) description += " Biological Age/Ageing Rate";
-      if (diabetesHeartChecked) description += (bioAgeingChecked ? " + " : " ") + "Diabetes/Heart Risk";
-      if (thyroidChecked) description += ((bioAgeingChecked || diabetesHeartChecked) ? " + " : " ") + "Thyroid Risk";
+      const selections = ["Biological Age/Ageing Rate"]; // Always included
+      if (isDHR) selections.push("Diabetes/Heart Risk");
+      if (isThyroid) selections.push("Thyroid Risk");
+      description += " " + selections.join(" + ");
 
+      // Razorpay Checkout
       const options = {
         key: razorpayKey,
         amount: total * 100,
         currency: "INR",
-        name: "HealthCheck.ai", // Example brand
+        name: "HealthCheck.ai",
         description,
         handler: function (response) {
-          alert("✅ Payment successful! ID: " + response.razorpay_payment_id);
+          alert("✅ Payment successful!\nPayment ID: " + response.razorpay_payment_id);
           window.location.href = "/order-confirmation";
         },
         prefill: {
@@ -729,14 +723,17 @@
         }
       };
 
-      const rzp1 = new Razorpay(options);
-      rzp1.open();
-    }, 800);
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }, 700);
   });
 
-  // Initialize button state
-  updateTotalPrice();
+  // Initialize with Biological Age option pre-selected
+  window.onload = function() {
+    updateTotalPrice();
+  };
 </script>
+
 
 </body>
 </html>
