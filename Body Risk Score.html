@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Body Risk Score Booking</title>
+   <!-- Favicon -->
+   <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+   <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="text.css">
   <style>
-    @font-face {
+   @font-face {
       font-family: 'Archia-Light';
       src: url(Archia_Font/Archia-Light.otf);
     }
@@ -281,8 +282,8 @@
       content: "";
       position: absolute;
       display: none;
-      left: 9px;
-      top: 5px;
+      left: 6px;
+      top: 1px;
       width: 6px;
       height: 12px;
       border: solid white;
@@ -498,8 +499,8 @@
     .pre-selected:after {
       content: "Included";
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 10px;
+      right: 10px;
       background: var(--primary-color);
       color: white;
       font-size: 12px;
@@ -550,7 +551,7 @@
               <span class="feature-icon">❤️</span>
               <div class="feature-text">
                 <h4>Diabetes Risk & Heart Risk</h4>
-                <p>Comprehensive cardiac health and diabetes risk evaluation</p>
+                <p>Detailed health profile for cardiac, blood sugar, and lipid risk + 75 other tests </p>
               </div>
               <div class="checkbox-container">
                 <input type="checkbox" id="addDiabetesHeart" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'diabetesHeartFeature')">
@@ -563,7 +564,7 @@
               <span class="feature-icon">⚡</span>
               <div class="feature-text">
                 <h4>Thyroid Risk Score</h4>
-                <p>Complete thyroid function assessment</p>
+                <p>⁠Complete thyroid function analysis and autoimmune indicators </p>
               </div>
               <div class="checkbox-container">
                 <input type="checkbox" id="addThyroid" onchange="updateTotalPrice(); toggleFeatureSelection(this, 'thyroidFeature')">
@@ -587,10 +588,10 @@
           <div id="result" class="result"></div>
         </div>
         
-        <!-- Billing Summary Display -->
+        <!-- Total Price Display -->
         <div class="total-price-section" id="totalPriceSection">
           <h3>Billing Summary</h3>
-          <h1 class="total-price" id="totalPrice">₹2000</h1>
+          <p class="total-price" id="totalPrice">₹2000</p>
         </div>
         
         <button id="bookTestBtn" class="cta-btn float-animation">Book Your Test Now</button>
@@ -607,38 +608,33 @@
   const thyroidPrice = 2000;
 
   let availablePincodes = [];
-
-  // Load Pincode List
+  
+  // Load and transform pincodes from JSON
   fetch('pincodes.json')
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
+      // Extract the pincode numbers and convert to strings for comparison
       availablePincodes = data.map(entry => String(entry.Pincode));
     })
-    .catch(err => {
-      console.error("Error loading pincodes.json:", err);
+    .catch(error => {
+      console.error("Error loading pincodes:", error);
     });
-
-  // Check Pincode Availability
+  
   function checkPincode() {
     const input = document.getElementById("pincodeInput").value.trim();
     const resultDiv = document.getElementById("result");
+    
     resultDiv.style.opacity = 0;
-
+    
     setTimeout(() => {
       if (availablePincodes.includes(input)) {
         resultDiv.innerHTML = `<span class="tick">✔</span><span class="available">Available in your area!</span>`;
       } else {
         resultDiv.innerHTML = `<span class="unavailable">Sorry, our services are currently unavailable at your pincode.</span>`;
       }
+      
       resultDiv.style.opacity = 1;
     }, 300);
-  }
-
-  // Highlight Selected Feature
-  function toggleFeatureSelection(checkbox, featureId) {
-    const feature = document.getElementById(featureId);
-    feature.classList.toggle("selected-feature", checkbox.checked);
-    updateTotalPrice();
   }
 
   // Calculate Total Price
@@ -732,8 +728,8 @@
   window.onload = function() {
     updateTotalPrice();
   };
-</script>
 
+</script>
 
 </body>
 </html>
