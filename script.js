@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Animate the line to grow
-    timelineLine.style.height = `${totalHeight}px`;
+    
     
     // Animate items one by one
     timelineItems.forEach((item, index) => {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           timelineJoints[index].classList.add('visible');
         }, 200);
-      }, 400 * index);
+      }, 300 * index);
     });
   }
 });
@@ -183,77 +183,82 @@ document.addEventListener('DOMContentLoaded', function() {
   const currentQuestion = document.getElementById('current-question');
   const currentImage = document.getElementById('current-image');
   const radioOptions = document.querySelectorAll('input[name="answer"]');
-  
-  // Color configuration
-  const correctColor = '#4caf50';  // Green for correct answers
-  const incorrectColor = '#f44336'; // Red for incorrect answers
-  
-  // Initialize with first card data
+
+  const correctColor = '#4caf50';
+  const incorrectColor = '#f44336';
+
+  const questionAnswers = {
+    "Men and women age the same way.": "myth",
+    "You start ageing before you're born.": "fact",
+    "Your biological age can only move forward.": "myth",
+    "Stress ages you faster than smoking.": "fact"
+  };
+
+  const questionExplanations = {
+    "Men and women age the same way.": 
+      "They don't. From heart disease risk to sleep quality, women age on an entirely different curve. Most research doesn't reflect that—because most of it never included them.",
+    "You start ageing before you're born.":
+      "Your biological baseline is shaped in the womb. A mother's stress, sleep, and nutrition can set the tone for how her child's body responds to stress decades later.",
+    "Your biological age can only move forward.":
+      "It doesn't have to. Studies show that improving sleep, reducing inflammation, and managing stress can reverse biological age markers in as little as 8 weeks.",
+    "Stress ages you faster than smoking.":
+      "Chronic stress shortens telomeres—protective caps on your DNA—faster than almost any lifestyle habit, including cigarettes. The damage is silent but measurable."
+  };
+
+  const normalize = str => str.trim().replace(/’/g, "'");
+
   if (mythCards.length > 0) {
-      const firstCard = mythCards[0];
-      currentQuestion.textContent = firstCard.dataset.title;
-      currentImage.src = firstCard.dataset.image;
-      currentImage.alt = firstCard.querySelector('.card-image').alt;
+    const firstCard = mythCards[0];
+    currentQuestion.textContent = firstCard.querySelector('h3').textContent.trim();
+    currentImage.src = firstCard.dataset.image;
+    currentImage.alt = firstCard.querySelector('.card-image').alt;
   }
-  
-  // Add click event to all myth cards
+
   mythCards.forEach(card => {
-      card.addEventListener('click', function() {
-          // Reset radio buttons
-          radioOptions.forEach(radio => radio.checked = false);
-          
-          // Reset result container
-          resultContainer.classList.remove('show');
-          resultContainer.innerHTML = '';
-          
-          // Update question and image
-          currentQuestion.textContent = this.dataset.title;
-          currentImage.src = this.dataset.image;
-          currentImage.alt = this.querySelector('.card-image').alt;
-          
-          // Scroll to top of active card on mobile
-          if (window.innerWidth < 992) {
-              document.querySelector('.active-card').scrollIntoView({
-                  behavior: 'smooth'
-              });
-          }
-      });
-  });
-  
-  // Add event listener for radio buttons
-  radioOptions.forEach(radio => {
-      radio.addEventListener('change', function() {
-          const selectedCard = Array.from(mythCards).find(
-              card => card.dataset.title === currentQuestion.textContent
-          );
-          
-          if (selectedCard) {
-              const isMyth = this.value === 'myth';
-              const isCorrect = isMyth ? 
-                  selectedCard.dataset.mythCorrect === 'true' : 
-                  selectedCard.dataset.factCorrect === 'true';
-              
-              const explanation = isMyth ? 
-                  selectedCard.dataset.mythExplanation : 
-                  selectedCard.dataset.factExplanation;
-              
-              // Show result with colored text
-              resultContainer.innerHTML = `
-                  <div class="congrats" style="color: ${isCorrect ? correctColor : incorrectColor}; font-weight: bold;">
-                      ${isCorrect ? 'Congratulation, Right Answer!' : 'Sorry, that\'s not correct.'}
-                  </div>
-                  <p>${explanation}</p>
-              `;
-              resultContainer.classList.add('show');
-          }
-      });
-  });
-  
-  // Prevent default for read more links
-  document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('read-more')) {
-          e.preventDefault();
+    card.addEventListener('click', function() {
+      radioOptions.forEach(radio => radio.checked = false);
+      resultContainer.classList.remove('show');
+      resultContainer.innerHTML = '';
+
+      const cardTitle = card.querySelector('h3').textContent.trim();
+      currentQuestion.textContent = cardTitle;
+      currentImage.src = card.dataset.image;
+      currentImage.alt = card.querySelector('.card-image').alt;
+
+      if (window.innerWidth < 992) {
+        document.querySelector('.active-card').scrollIntoView({
+          behavior: 'smooth'
+        });
       }
+    });
+  });
+
+  radioOptions.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const currentTitle = normalize(currentQuestion.textContent);
+      const correctAnswer = questionAnswers[currentTitle];
+      const userSelectedOption = this.value;
+      const isCorrect = userSelectedOption === correctAnswer;
+      const explanation = questionExplanations[currentTitle] || "";
+
+      const feedbackMessage = isCorrect
+        ? "Congratulation, Right Answer!"
+        : "Sorry, that's not correct.";
+
+      resultContainer.innerHTML = `
+        <div class="congrats" style="color: ${isCorrect ? correctColor : incorrectColor}; font-weight: bold;">
+          ${feedbackMessage}
+        </div>
+        ${isCorrect ? `<p>${explanation}</p>` : ""}
+      `;
+      resultContainer.classList.add('show');
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('read-more')) {
+      e.preventDefault();
+    }
   });
 });
 

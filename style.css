@@ -161,7 +161,7 @@ h2 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .hero {
         text-align: left;
         padding: 20px 10px;
@@ -169,12 +169,14 @@ h2 {
 
     h2 {
         font-size: 28px;
-        margin-bottom: 10px;
+        margin-bottom: -10px;
         text-align: left;
     }
 
     .intro-text {
         font-size: 15px;
+        padding: 0px;
+        text-align: left;
     }
 
     .mid-text {
@@ -254,7 +256,7 @@ h2 {
     left: 8px;
     top: 0;
     width: 4px;
-    height: 0;
+    height: 300px;
     background-color: #0e406b;
     border-radius: 2px;
     transition: height 1.5s ease-out;
@@ -304,6 +306,14 @@ h2 {
     opacity: 1;
     transform: translateY(0);
   }
+  @media (max-width: 768px) {
+
+    .timeline-line {
+        height: 350px!important;
+    }
+  }
+
+  
   
   /* Add some space at the top to demonstrate scroll effect */
   .spacer {
@@ -444,7 +454,7 @@ h2 {
     border-radius: 16px;
     padding: 30px;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 15px;
     box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
 }
 
@@ -576,7 +586,7 @@ h2 {
 
 .left-panel {
     background-color: #a7d3d3;
-    padding: 20px;
+    padding: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -585,7 +595,7 @@ h2 {
 
 .cartoon-img {
     max-width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -601,7 +611,7 @@ h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
     text-align: left;
-    color: #2e5e5e;
+    color: #093c6a;
 }
 
 .question-card p {
@@ -702,7 +712,7 @@ input[type="radio"] {
 
 .myth-card-content h3 {
     font-size: 1.2rem;
-    color: #2e5e5e;
+    color: #093c6a;
 }
 
 .read-more {
@@ -757,6 +767,9 @@ input[type="radio"] {
     
     .question-card h2 {
         font-size: 1.5rem;
+    }
+    .question-card p {
+        color: #1d1d1d;
     }
     
     .options {
@@ -826,4 +839,11 @@ input[type="radio"] {
   .copyright {
     font-size: 14px;
     color: #333;
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+        padding: 20px 20px;
+    }
+
   }

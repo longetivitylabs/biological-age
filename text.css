@@ -7,7 +7,7 @@
   
   /* Custom */
   .type{ 
-    max-width: 300px;
+    max-width: 350px;
     color: #0e406b;
     background: -webkit-linear-gradient(25deg, #0e406b68, #0e406b);
     -webkit-background-clip: text;
@@ -39,13 +39,19 @@
       border-color: transparent;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 780px) {
     .container {
         display: flex;
         justify-content: left;
         align-items: left;
         padding: 0;
       }
+      .type{ 
+        max-width: 300px;
+        font-size: 2.5rem;
+        font-family: 'Archia-medium';
+        font-style: italic;
+    }
       h1 {
         max-width: 200px;
         font-size: 2rem;

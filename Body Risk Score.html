@@ -9,10 +9,16 @@
    <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-   @font-face {
-      font-family: 'Archia-Light';
-      src: url(Archia_Font/Archia-Light.otf);
-    }
+    @font-face {
+    font-family: 'Archia-Bold';
+    font-family: 'Archia-Medium';
+    src: url(Archia_Font/Archia-Medium.otf);
+    src: url(Archia_Font/Archia-Bold.otf);
+}
+@font-face {
+    font-family: 'Archia-Light';
+    src: url(Archia_Font/Archia-Light.otf);
+  }
     :root {
       --primary-color: #0E406B;
       --secondary-color: #193d3d;
@@ -34,6 +40,7 @@
       padding: 40px 20px;
       display: flex;
       justify-content: center;
+      font-family: 'Archia-Medium';
       align-items: center;
       min-height: 100vh;
       margin: 0;
@@ -210,6 +217,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     
     .feature-item:hover .feature-icon {
@@ -251,6 +259,7 @@
       display: flex;
       align-items: center;
       margin-left: auto;
+      flex-shrink: 0;
     }
     
     .custom-checkbox {
@@ -344,7 +353,7 @@
       width: 100%;
     }
     
-  .check-btn:hover {
+    .check-btn:hover {
       filter: brightness(1.1);
       transform: translateY(-2px);
     }
@@ -499,8 +508,8 @@
     .pre-selected:after {
       content: "Included";
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 5px;
+      right: 5px;
       background: var(--primary-color);
       color: white;
       font-size: 12px;
@@ -508,29 +517,137 @@
       border-radius: 10px;
     }
     
-    /* Responsive design */
+    /* Improved Responsive design */
     @media (max-width: 768px) {
+      body {
+        padding: 20px 10px;
+      }
+      
+      .package-box {
+        padding: 25px 15px;
+        border-radius: 16px;
+      }
+      
+      .package-box h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+      
       .layout-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 25px;
       }
       
       .right-column {
         border-left: none;
         border-top: 1px solid #eaeaea;
         padding-left: 0;
-        padding-top: 30px;
+        padding-top: 25px;
       }
       
-      .package-box {
-        padding: 30px 20px;
+      .feature-item {
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
       }
+      
+      .feature-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .feature-text {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      
+      .feature-item h4 {
+        font-size: 15px;
+      }
+      
+      .feature-item p {
+        font-size: 13px;
+      }
+      
+      .checkbox-container {
+        margin-left: 0;
+        margin-top: 5px;
+        justify-content: center;
+      }
+      
+      .feature-price {
+        margin-left: 5px;
+      }
+      
       .pre-selected:after {
-        top: 1px;
-        right: 1px;
+        top: 5px;
+        right: 5px;
         font-size: 10px;
       }
+      
+      .cta-btn {
+        padding: 15px;
+        font-size: 16px;
+      }
+      
+      .total-price {
+        font-size: 22px;
+      }
+      
+      .pincode-section,
+      .total-price-section {
+        padding: 15px;
+      }
+      
+      .pincode-section h3,
+      .total-price-section h3,
+      .feature-section h3 {
+        font-size: 16px;
+      }
+      
+      input[type="text"] {
+        padding: 12px;
+        font-size: 14px;
+      }
+      
+      .check-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+      
+      .result {
+        font-size: 14px;
+      }
     }
+    
+    /* Additional media query for extremely small screens */
+    @media (max-width: 360px) {
+      .package-box {
+        padding: 15px 12px;
+      }
+      
+      .feature-item {
+        padding: 10px 8px;
+      }
+      
+      .feature-icon {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .feature-item h4 {
+        font-size: 14px;
+      }
+      
+      .feature-item p {
+        font-size: 12px;
+      }
+    }
+    
   </style>
 </head>
 <body>
@@ -555,7 +672,7 @@
             <label class="feature-item" id="diabetesHeartFeature" for="addDiabetesHeart">
               <span class="feature-icon">❤️</span>
               <div class="feature-text">
-                <h4>Diabetes Risk & Heart Risk</h4>
+                <h4>Diabetes & Heart Risk Score</h4>
                 <p>Detailed health profile for cardiac, blood sugar, and lipid risk + 75 other tests </p>
               </div>
               <div class="checkbox-container">
@@ -663,6 +780,16 @@
     btn.disabled = false;
     btn.style.opacity = "1";
     btn.style.cursor = "pointer";
+  }
+
+  // Toggle feature selection visual indication
+  function toggleFeatureSelection(checkbox, featureId) {
+    const feature = document.getElementById(featureId);
+    if (checkbox.checked) {
+      feature.classList.add('selected-feature');
+    } else {
+      feature.classList.remove('selected-feature');
+    }
   }
 
   // Handle Booking Button
