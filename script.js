@@ -173,48 +173,72 @@ document.addEventListener('DOMContentLoaded', function() {
   const currentQuestion = document.getElementById('current-question');
   const currentImage = document.getElementById('current-image');
   const radioOptions = document.querySelectorAll('input[name="answer"]');
-
+  
   const correctColor = '#4caf50';
   const incorrectColor = '#f44336';
-
+  
   const questionAnswers = {
     "Men and women age the same way.": "myth",
     "You start ageing before you're born.": "fact",
     "Your biological age can only move forward.": "myth",
     "Stress ages you faster than smoking.": "fact"
   };
-
+  
   const questionExplanations = {
     "Men and women age the same way.": 
       "They don't. From heart disease risk to sleep quality, women age on an entirely different curve. Most research doesn't reflect that—because most of it never included them.",
-    "You start ageing before you're born.":
+    "You start ageing before you're born.": 
       "Your biological baseline is shaped in the womb. A mother's stress, sleep, and nutrition can set the tone for how her child's body responds to stress decades later.",
-    "Your biological age can only move forward.":
+    "Your biological age can only move forward.": 
       "It doesn't have to. Studies show that improving sleep, reducing inflammation, and managing stress can reverse biological age markers in as little as 8 weeks.",
-    "Stress ages you faster than smoking.":
+    "Stress ages you faster than smoking.": 
       "Chronic stress shortens telomeres—protective caps on your DNA—faster than almost any lifestyle habit, including cigarettes. The damage is silent but measurable."
   };
-
-  const normalize = str => str.trim().replace(/'/g, "'");
-
+  
+  // Extremely comprehensive normalize function
+  const normalize = str => {
+    if (!str) return '';
+    
+    // Remove any markdown, asterisks, or special formatting
+    let normalized = str.replace(/\*\*/g, '')
+                         .replace(/\*/g, '')
+                         .replace(/\n/g, ' ')
+                         .replace(/\s+/g, ' ')
+                         .trim();
+    
+    // Replace smart quotes and apostrophes with plain versions
+    normalized = normalized.replace(/[''′]/g, "'")
+                         .replace(/[""]/g, '"');
+    
+    return normalized;
+  };
+  
+  // Direct mapping for problematic questions
+  const directMappings = {
+    "you start ageing before youre born": "fact",
+    "you start ageing before you're born": "fact",
+    "you start aging before youre born": "fact",
+    "you start aging before you're born": "fact"
+  };
+  
   if (mythCards.length > 0) {
     const firstCard = mythCards[0];
     currentQuestion.textContent = firstCard.querySelector('h3').textContent.trim();
     currentImage.src = firstCard.dataset.image;
     currentImage.alt = firstCard.querySelector('.card-image').alt;
   }
-
+  
   mythCards.forEach(card => {
     card.addEventListener('click', function() {
       radioOptions.forEach(radio => radio.checked = false);
       resultContainer.classList.remove('show');
       resultContainer.innerHTML = '';
-
+      
       const cardTitle = card.querySelector('h3').textContent.trim();
       currentQuestion.textContent = cardTitle;
       currentImage.src = card.dataset.image;
       currentImage.alt = card.querySelector('.card-image').alt;
-
+      
       if (window.innerWidth < 992) {
         document.querySelector('.active-card').scrollIntoView({
           behavior: 'smooth'
@@ -222,29 +246,70 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
+  
   radioOptions.forEach(radio => {
     radio.addEventListener('change', function() {
-      const currentTitle = normalize(currentQuestion.textContent);
-      const correctAnswer = questionAnswers[currentTitle];
+      const rawQuestion = currentQuestion.textContent;
+      const normalizedQuestion = normalize(rawQuestion);
+      let correctAnswer;
+      let explanation;
+      
+      // First check for exact match
+      if (questionAnswers[rawQuestion]) {
+        correctAnswer = questionAnswers[rawQuestion];
+        explanation = questionExplanations[rawQuestion];
+      } 
+      // Then check normalized version
+      else if (questionAnswers[normalizedQuestion]) {
+        correctAnswer = questionAnswers[normalizedQuestion];
+        explanation = questionExplanations[normalizedQuestion];
+      } 
+      // Special handling for the problematic question
+      else if (normalizedQuestion.toLowerCase().includes("start ag") && 
+               normalizedQuestion.toLowerCase().includes("before") && 
+               normalizedQuestion.toLowerCase().includes("born")) {
+        correctAnswer = "fact";
+        explanation = questionExplanations["You start ageing before you're born."];
+      }
+      // Check direct mappings as last resort
+      else {
+        const simplifiedQuestion = normalizedQuestion.toLowerCase().replace(/'/g, "");
+        correctAnswer = directMappings[simplifiedQuestion];
+        
+        // Find the closest match for explanation
+        for (const key in questionExplanations) {
+          if (normalize(key).toLowerCase().includes(simplifiedQuestion) || 
+              simplifiedQuestion.includes(normalize(key).toLowerCase())) {
+            explanation = questionExplanations[key];
+            break;
+          }
+        }
+      }
+      
+      // Debug logging
+      console.log("Raw question:", rawQuestion);
+      console.log("Normalized question:", normalizedQuestion);
+      console.log("Found answer:", correctAnswer);
+      
       const userSelectedOption = this.value;
       const isCorrect = userSelectedOption === correctAnswer;
-      const explanation = questionExplanations[currentTitle] || "";
-
+      
       const feedbackMessage = isCorrect
         ? "Congratulations, that's correct!"
         : "Sorry, that's not correct.";
-
+      
       resultContainer.innerHTML = `
+      <strong>
         <div class="congrats" style="color: ${isCorrect ? correctColor : incorrectColor}; font-weight: bold;">
           ${feedbackMessage}
         </div>
-        <p>${explanation}</p>
+      </strong>
+      <p>${explanation || ""}</p>
       `;
       resultContainer.classList.add('show');
     });
   });
-
+  
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('read-more')) {
       e.preventDefault();
@@ -252,7 +317,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-//Quiz End
 
 //Start pincode Available
 let availablePincodes = [];

@@ -1,13 +1,11 @@
 /* Main styles for biological age testing landing page */
 @font-face {
     font-family: 'Archia-Bold';
-    font-family: 'Archia-Medium';
-    src: url(Archia_Font/Archia-Medium.otf);
     src: url(Archia_Font/Archia-Bold.otf);
 }
 @font-face {
-    font-family: 'Archia-Light';
-    src: url(Archia_Font/Archia-Light.otf);
+    font-family: 'Archia-Medium';
+    src: url(Archia_Font/Archia-Medium.otf);
   }
 
 html {
@@ -15,7 +13,7 @@ html {
 }
 
 body {
-    font-family: 'Archia-medium';
+    font-family: 'Archia-Medium';
     margin: 0;
     padding: 0;
     background-color: #d9f0ff;
@@ -23,16 +21,16 @@ body {
 }
 
 h1{
-    font-family: 'Archia-medium';
+    font-family: 'Archia-Bold';
 }
 h2{
-    font-family: 'Archia-Medium';
+    font-family: 'Archia-Bold';
     }
 p{
-    font-family: 'Archia-Light';
+    font-family: 'Archia-Medium';
     }
 strong{
-    font-family: 'Archia-medium';
+    font-family: 'Archia-Bold';
 }
 
 .containers {
@@ -219,7 +217,7 @@ h2 {
 }
 
 .text-content p {
-    font-size: 17px;
+    font-size: 27px;
     margin: 10px 0;
 }
 .text-content p strong {
@@ -313,7 +311,7 @@ h2 {
   @media (max-width: 768px) {
 
     .timeline-line {
-        height: 300px!important;
+        height: 310px!important;
     }
   }
 
@@ -619,7 +617,7 @@ h2 {
 }
 
 .question-card p {
-    margin-bottom: 20px;
+    margin: 20px 0;
     font-size: 17px;
 }
 
