@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "Chronic stress shortens telomeres—protective caps on your DNA—faster than almost any lifestyle habit, including cigarettes. The damage is silent but measurable."
   };
 
-  const normalize = str => str.trim().replace(/’/g, "'");
+  const normalize = str => str.trim().replace(/'/g, "'");
 
   if (mythCards.length > 0) {
     const firstCard = mythCards[0];
@@ -242,14 +242,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const explanation = questionExplanations[currentTitle] || "";
 
       const feedbackMessage = isCorrect
-        ? "Congratulation, Right Answer!"
+        ? "Congratulations, that's correct!"
         : "Sorry, that's not correct.";
 
       resultContainer.innerHTML = `
         <div class="congrats" style="color: ${isCorrect ? correctColor : incorrectColor}; font-weight: bold;">
           ${feedbackMessage}
         </div>
-        ${isCorrect ? `<p>${explanation}</p>` : ""}
+        <p>${explanation}</p>
       `;
       resultContainer.classList.add('show');
     });
@@ -265,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //Quiz End
 
 //Start pincode Available
-
 let availablePincodes = [];
   
     // Load and transform pincodes from JSON

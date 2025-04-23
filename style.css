@@ -88,6 +88,9 @@ h2 {
     will-change: transform;
     animation: scroll 25s linear infinite;
 }
+.carousels:hover {
+    animation-play-state: paused;
+  }
 
 .card {
     width: 320px;
@@ -159,6 +162,7 @@ h2 {
         height: 350px;
         scroll-snap-align: center;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -174,7 +178,7 @@ h2 {
     }
 
     .intro-text {
-        font-size: 15px;
+        font-size: 17px;
         padding: 0px;
         text-align: left;
     }
@@ -212,10 +216,11 @@ h2 {
 .text-content {
     flex: 1;
     color: #0E406B;
+    text-align: left;
 }
 
 .text-content p {
-    font-size: 1.8rem;
+    font-size: 17px;
     margin: 10px 0;
 }
 .text-content p strong {
@@ -238,7 +243,7 @@ h2 {
         height: 250px;
     }
     .text-content p {
-        font-size: .90rem;
+        font-size: 17px;
         margin: 10px 0;
     }
 }
@@ -291,8 +296,8 @@ h2 {
   
   .timeline-item-text {
     display: flex;
-    align-items: center;
-    font-size: 20px;
+    align-items: flex-start;
+    font-size: 17px;
     font-weight: 500;
     color: #333;
   }
@@ -309,7 +314,7 @@ h2 {
   @media (max-width: 768px) {
 
     .timeline-line {
-        height: 350px!important;
+        height: 300px!important;
     }
   }
 
@@ -421,7 +426,7 @@ h2 {
     position: absolute;
     bottom: 15px;
     right: 15px;
-    font-size: 12px;
+    font-size: 17px;
     color: #cbd5e1;
 }
 
@@ -520,7 +525,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 17px;
     font-weight: 600;
     color: #64748b;
     transition: all 0.3s ease;
@@ -616,7 +621,7 @@ h2 {
 
 .question-card p {
     margin-bottom: 20px;
-    font-size: 1.1rem;
+    font-size: 17px;
 }
 
 .options {
@@ -632,7 +637,7 @@ h2 {
 }
 
 .radio-option label {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     cursor: pointer;
 }
 
@@ -721,7 +726,7 @@ input[type="radio"] {
     color: #2e8b8b;
     font-weight: bold;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .read-more:after {
@@ -792,7 +797,7 @@ input[type="radio"] {
 
   input[type="text"] {
     padding: 10px;
-    font-size: 16px;
+    font-size: 17px;
     width: 200px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -802,14 +807,14 @@ input[type="radio"] {
     background-color: #193d3d;
     color: white;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 17px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
 
   .result {
-    font-size: 16px;
+    font-size: 17px;
     margin-top: 10px;
   }
 
@@ -837,7 +842,7 @@ input[type="radio"] {
   }
   
   .copyright {
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
   }
 
