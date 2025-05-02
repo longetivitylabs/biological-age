@@ -8,6 +8,9 @@
    <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
    <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
   <style>
     @font-face {
     font-family: 'Archia-Bold';
@@ -547,11 +550,11 @@
     .pre-selected:after {
       content: "Included";
       position: absolute;
-      top: 2px;
-      right: 3px;
+      top: 1px;
+      right: 1px;
       background: var(--primary-color);
       color: white;
-      font-size: 12px;
+      font-size:8px;
       padding: 3px 8px;
       border-radius: 10px;
     }
@@ -759,7 +762,14 @@
           <h3>Billing Summary</h3>
           <p class="total-price" id="totalPrice">₹2000</p>
         </div>
-        
+
+        <div class="bg-yellow-100 border border-yellow-300 text-yellow-800 p-4 rounded-lg mt-5 text-xs sm:text-sm font-normal">
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Booking for more than one person?</strong></li>
+            <li>Place separate orders—each person gets their own guided journey.</li>
+          </ul>
+        </div>
+   
         <button id="bookTestBtn" class="cta-btn float-animation">Book Your Test Now</button>
       </div>
     </div>
