@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refund & Cancellation Policy</title>
+  <!-- Favicon -->
+  <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Archia-Bold';
+      src: url(Archia_Font/Archia-Bold.otf);
+    }
+    @font-face {
+      font-family: 'Archia-Medium';
+      src: url(Archia_Font/Archia-Medium.otf);
+    }
+
+    body {
+      font-family: 'Archia-Medium';
+      background-color: #d9f0ff;
+      color: #333;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #0e406b;
+      text-align: left;
+      position: relative;
+      font-family: 'Archia-Bold';
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #0e406b;
+      
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; }
+      to { width: 60px; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro-text {
+      margin-bottom: 30px;
+      font-size: 16px;
+      color: #555;
+      animation: fadeIn 1s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .policy-section {
+      background: #fff;
+      border-left: 6px solid #0e406b;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .policy-section:nth-child(1) { animation-delay: 0.2s; }
+    .policy-section:nth-child(2) { animation-delay: 0.3s; }
+    .policy-section:nth-child(3) { animation-delay: 0.4s; }
+    .policy-section:nth-child(4) { animation-delay: 0.5s; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .policy-section:hover {
+      box-shadow: 0 12px 24px rgba(14, 64, 107, 0.15);
+      transform: translateY(-8px);
+      border-left-width: 10px;
+    }
+
+    .policy-section:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      background: #0e406b;
+      bottom: 0;
+      left: 0;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .policy-section:hover:after {
+      width: 100%;
+    }
+
+    .policy-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background: #0e406b;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .policy-section:hover::before {
+      width: 100%;
+      right: auto;
+      left: 0;
+    }
+
+    .policy-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #0e406b;
+      display: flex;
+      align-items: center;
+      font-family: 'Archia-Bold';
+    }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #f0f8ff;
+      border-radius: 50%;
+      margin-right: 15px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      font-size: 22px;
+    }
+
+    .icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(14, 64, 107, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.4s ease;
+    }
+
+    .policy-section:hover .icon::before {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    .policy-section:hover .icon {
+      transform: rotate(360deg) scale(1.1);
+      background: #e6f3ff;
+      box-shadow: 0 4px 10px rgba(14, 64, 107, 0.2);
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 5px;
+    }
+
+    li::marker {
+      color: #0e406b;
+    }
+
+    /* Special animation for each policy icon */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(14, 64, 107, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(14, 64, 107, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(14, 64, 107, 0);
+      }
+    }
+
+    .policy-section:nth-child(4) .icon {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .policy-section:nth-child(3) .icon {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(5deg);
+      }
+      75% {
+        transform: rotate(-5deg);
+      }
+    }
+
+    .policy-section:nth-child(5) .icon {
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    strong {
+      color: #0e406b;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .policy-section {
+        padding: 20px 15px;
+      }
+      
+      .icon {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Refund & Cancellation Policy</h1>
+  <p class="intro-text">We get it—plans change. Here's how refunds work at The Oak Age:</p>
+
+  <div class="policy-section">
+    <div class="policy-title">
+      <div class="icon">🕛</div>
+      Cancelling before 24 hours
+    </div>
+    <p>
+      You can cancel your booking up to 24 hours before your scheduled blood sample collection.
+      We'll refund your payment after deducting <strong>1.5%</strong> as payment gateway charges.
+    </p>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-title">
+      <div class="icon">⚠️</div>
+      Cancelling between 12 to 24 hours
+    </div>
+    <p>
+      Life happens. If you cancel between 12 to 24 hours before your appointment, we'll still process your refund—after deducting:
+    </p>
+    <ul>
+      <li>₹350 as a service fee</li>
+      <li>plus 1.5% payment gateway charge</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-title">
+      <div class="icon">🚫</div>
+      No cancellations within 12 hours
+    </div>
+    <p>
+      We won't be able to offer refunds or cancellations within 12 hours of your scheduled test.
+      That's because lab resources and logistics are already locked in by then.
+    </p>
+  </div>
+
+</body>
+</html>

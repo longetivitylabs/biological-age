@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - The Oak Age</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <!-- Favicon -->
+  <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+        font-family: 'Archia-Bold';
+        src: url(Archia_Font/Archia-Bold.otf);
+    }
+    @font-face {
+        font-family: 'Archia-Medium';
+        src: url(Archia_Font/Archia-Medium.otf);
+    }
+
+    body {
+      font-family: 'Archia-Medium';
+      background-color: #d9f0ff;
+      color: #333;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #0e406b;
+      text-align: left;
+      position: relative;
+      font-family: 'Archia-Bold';
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #0e406b;
+      animation: expandWidth 1.2s ease-out forwards;
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; }
+      to { width: 60px; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro-text {
+      text-align: left;
+      margin-bottom: 30px;
+      font-size: 16px;
+      color: #555;
+      animation: fadeIn 1s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .contact-section {
+      background: #fff;
+      border-left: 6px solid #0e406b;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .contact-section:nth-child(1) { animation-delay: 0.2s; }
+    .contact-section:nth-child(2) { animation-delay: 0.3s; }
+    .contact-section:nth-child(3) { animation-delay: 0.4s; }
+    .contact-section:nth-child(4) { animation-delay: 0.5s; }
+    .contact-section:nth-child(5) { animation-delay: 0.6s; }
+    .contact-section:nth-child(6) { animation-delay: 0.7s; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .contact-section:hover {
+      box-shadow: 0 12px 24px rgba(14, 64, 107, 0.15);
+      transform: translateY(-8px);
+      border-left-width: 10px;
+    }
+
+    .contact-section:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      background: #0e406b;
+      bottom: 0;
+      left: 0;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-section:hover:after {
+      width: 100%;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background: #0e406b;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-section:hover::before {
+      width: 100%;
+      right: auto;
+      left: 0;
+    }
+
+    .contact-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #0e406b;
+      display: flex;
+      align-items: center;
+      font-family: 'Archia-Bold';
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: flex-start;
+      margin: 12px 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #f0f8ff;
+      border-radius: 50%;
+      margin-right: 15px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .icon-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(14, 64, 107, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.4s ease;
+    }
+
+    .contact-section:hover .icon-wrapper::before {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    .contact-section:hover .icon-wrapper {
+      transform: rotate(360deg) scale(1.1);
+      background: #e6f3ff;
+      box-shadow: 0 4px 10px rgba(14, 64, 107, 0.2);
+    }
+
+    .contact-title .icon-wrapper {
+      margin-right: 12px;
+    }
+
+    .icon-wrapper i {
+      font-size: 18px;
+      color: #0e406b;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-section:hover .icon-wrapper i {
+      color: #0e406b;
+      transform: scale(1.2);
+    }
+
+    .contact-line a {
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      padding: 0 2px;
+    }
+
+    .contact-line a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #0e406b;
+      transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .contact-line a:hover {
+      color: #0e406b;
+      transform: translateY(-2px);
+    }
+
+    .contact-line a:hover:after {
+      width: 100%;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #f0f8ff;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .social-icons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(14, 64, 107, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.4s ease;
+    }
+
+    .social-icons a:hover::before {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    .social-icons a:hover {
+      transform: translateY(-8px) scale(1.15);
+      box-shadow: 0 8px 15px rgba(14, 64, 107, 0.2);
+    }
+
+    .social-icons i {
+      font-size: 22px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .social-icons a:hover i {
+      transform: scale(1.2);
+    }
+
+    .business-hours-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .day {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .hours {
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .contact-section {
+        padding: 20px 15px;
+      }
+      
+      .icon-wrapper {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .social-icons a {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Pulse animation for chat button */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(14, 64, 107, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(14, 64, 107, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(14, 64, 107, 0);
+      }
+    }
+
+    .contact-section:nth-child(4) .icon-wrapper {
+      animation: pulse 2s infinite;
+    }
+
+    /* Floating animation for email and whatsapp */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .contact-section:nth-child(2) .icon-wrapper,
+    .contact-section:nth-child(3) .icon-wrapper {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Contact Us</h1>
+  <p class="intro-text">Reach out anytime for help or to share feedback. We typically respond within 4 business hours.</p>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fas fa-home"></i></div>
+      Address
+    </div>
+    <div class="contact-line">
+      Longetivity Labs, 2nd floor, 377-383, MKN Rd, above SBI Bank, Ramapuram, Alandur, Chennai, Tamil Nadu 600016
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fab fa-whatsapp" style="color: #25D366;"></i></div>
+      WhatsApp
+    </div>
+    <div class="contact-line">
+      <a href="https://wa.me/916374625243" target="_blank">+91 6374 625 243</a>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fas fa-envelope"></i></div>
+      Email
+    </div>
+    <div class="contact-line">
+      <a href="mailto:more@theoakage.com">more@theoakage.com</a>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fas fa-comments"></i></div>
+      Chat with us
+    </div>
+    <div class="contact-line">
+      <a href="#" onclick="Intercom('show'); return false;">Open Intercom Chat</a>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fas fa-clock"></i></div>
+      Business Hours
+    </div>
+    <div class="business-hours-grid">
+      <div class="day">Monday–Friday:</div>
+      <div class="hours">10:00 AM – 5:00 PM IST</div>
+      <div class="day">Saturday:</div>
+      <div class="hours">10:00 AM – 2:00 PM IST</div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      <div class="icon-wrapper"><i class="fas fa-share-alt"></i></div>
+      Connect with Us
+    </div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/people/The-Oak-Age/61559342020041/" target="_blank">
+        <i class="fab fa-facebook-square" style="color: #4267B2;"></i>
+      </a>
+      <a href="https://www.instagram.com/theoakage/" target="_blank">
+        <i class="fab fa-instagram" style="color: #E1306C;"></i>
+      </a>
+      <a href="https://youtube.com/@theoakage?si=3-bpZ3p8A1QaeCAS" target="_blank">
+        <i class="fab fa-youtube" style="color: #FF0000;"></i>
+      </a>
+      <a href="https://in.linkedin.com/company/the-oak-age" target="_blank">
+        <i class="fab fa-linkedin" style="color: #0077B5;"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Intercom Widget -->
+  <script>
+    window.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "xst45fgh",
+    };
+  </script>
+  <script>
+    (function(){
+      var w = window;
+      var ic = w.Intercom;
+      if (typeof ic === "function") {
+        ic('reattach_activator');
+        ic('update', w.intercomSettings);
+      } else {
+        var d = document;
+        var i = function () { i.c(arguments); };
+        i.q = [];
+        i.c = function (args) { i.q.push(args); };
+        w.Intercom = i;
+        var l = function () {
+          var s = d.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://widget.intercom.io/widget/xst45fgh';
+          var x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        };
+        if (document.readyState === 'complete') { l(); }
+        else if (w.attachEvent) { w.attachEvent('onload', l); }
+        else { w.addEventListener('load', l, false); }
+      }
+    })();
+  </script>
+
+</body>
+</html>
