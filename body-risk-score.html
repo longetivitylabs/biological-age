@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Body Risk Score Booking</title>
-   <!-- Favicon -->
-   <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
-   <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/Favicon__2_-removebg-preview.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS CDN -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <style>
     @font-face {
-    font-family: 'Archia-Bold';
-    src: url(Archia_Font/Archia-Bold.otf);
-}
-@font-face {
-  font-family: 'Archia-Medium';
-  src: url(Archia_Font/Archia-Medium.otf);
-  }
+      font-family: 'Archia-Bold';
+      src: url(Archia_Font/Archia-Bold.otf);
+    }
+    @font-face {
+      font-family: 'Archia-Medium';
+      src: url(Archia_Font/Archia-Medium.otf);
+    }
     :root {
       --primary-color: #0E406B;
       --secondary-color: #193d3d;
@@ -38,41 +38,41 @@
 
 
     .preloaderBg {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  background: #d9f0ff;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      background: #d9f0ff;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-.preloader {
-  background: url(https://cdn.shopify.com/s/files/1/0591/2389/2291/files/favicon__3_-removebg-preview_863b420e-87da-4ff2-a1f0-7b0a2793b76a.png?v=1733122225) no-repeat center;
-  background-size: 150px;
-  width: 300px;
-  height: 300px;
-}
+    .preloader {
+      background: url(https://cdn.shopify.com/s/files/1/0591/2389/2291/files/favicon__3_-removebg-preview_863b420e-87da-4ff2-a1f0-7b0a2793b76a.png?v=1733122225) no-repeat center;
+      background-size: 150px;
+      width: 300px;
+      height: 300px;
+    }
 
-.preloader2 {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #0E406B;
-  border-radius: 50%;
-  width: 250px;
-  height: 250px;
-  animation: spin 1s ease-in-out infinite;
-  margin-top: -280px; /* overlap effect as before */
-}
+    .preloader2 {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #0E406B;
+      border-radius: 50%;
+      width: 250px;
+      height: 250px;
+      animation: spin 1s ease-in-out infinite;
+      margin-top: -280px; /* overlap effect as before */
+    }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
 
 
@@ -765,62 +765,61 @@
 
         <div class="bg-yellow-100 border border-yellow-300 text-yellow-800 p-4 rounded-lg mt-5 text-xs sm:text-sm font-normal text-center">
           <ul class="list-disc pl-5 space-y-1">
-          <b>Booking for more than one person?</b>
-           <p>Place separate orders—each person gets their own guided journey.</p>
+            <b>Booking for more than one person?</b>
+            <p>Place separate orders—each person gets their own guided journey.</p>
           </ul>
         </div>
-   
+        
         <button id="bookTestBtn" class="cta-btn float-animation">Book Your Test Now</button>
       </div>
     </div>
   </div>
 
   
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-  const razorpayKey = "rzp_test_1DP5mmOlF5G5ag"; // Razorpay Test Key
-  const bioAgeingPrice = 2000;
-  const diabetesHeartPrice = 2000;
-  const thyroidPrice = 2000;
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- Cashfree SDK -->
+  <script src="https://sdk.cashfree.com/js/ui/2.0.0/cashfree.prod.js"></script>
 
-  let availablePincodes = [];
-  
+  <script>
+    const bioAgeingPrice = 2000;
+    const diabetesHeartPrice = 2000;
+    const thyroidPrice = 2000;
+
+    let availablePincodes = [];
+
   // Load and transform pincodes from JSON
   fetch('pincodes.json')
-    .then(response => response.json())
-    .then(data => {
-      // Extract the pincode numbers and convert to strings for comparison
-      availablePincodes = data.map(entry => String(entry.Pincode));
-    })
-    .catch(error => {
-      console.error("Error loading pincodes:", error);
-    });
-  
+  .then(response => response.json())
+  .then(data => {
+    availablePincodes = data.map(entry => String(entry.Pincode));
+  })
+  .catch(error => {
+    console.error("Error loading pincodes:", error);
+  });
+
   function checkPincode() {
     const input = document.getElementById("pincodeInput").value.trim();
     const resultDiv = document.getElementById("result");
-    
+
     resultDiv.style.opacity = 0;
-    
+
     setTimeout(() => {
       if (availablePincodes.includes(input)) {
         resultDiv.innerHTML = `<span class="tick">✔</span><span class="available">Available in your area!</span>`;
       } else {
         resultDiv.innerHTML = `<span class="unavailable">Sorry, our services are currently unavailable at your pincode.</span>`;
       }
-      
+
       resultDiv.style.opacity = 1;
     }, 300);
   }
 
-  // Calculate Total Price
   function updateTotalPrice() {
     const isDHR = document.getElementById("addDiabetesHeart").checked;
     const isThyroid = document.getElementById("addThyroid").checked;
     const totalEl = document.getElementById("totalPrice");
     const section = document.getElementById("totalPriceSection");
 
-    // Always include bioAgeingPrice as it's mandatory
     let total = bioAgeingPrice;
     if (isDHR) total += diabetesHeartPrice;
     if (isThyroid) total += thyroidPrice;
@@ -836,7 +835,6 @@
     btn.style.cursor = "pointer";
   }
 
-  // Toggle feature selection visual indication
   function toggleFeatureSelection(checkbox, featureId) {
     const feature = document.getElementById(featureId);
     if (checkbox.checked) {
@@ -853,7 +851,6 @@
     const isThyroid = document.getElementById("addThyroid").checked;
     const btn = document.getElementById("bookTestBtn");
 
-    // Always include bioAgeingPrice as it's mandatory
     let total = bioAgeingPrice;
     if (isDHR) total += diabetesHeartPrice;
     if (isThyroid) total += thyroidPrice;
@@ -877,62 +874,86 @@
       btn.disabled = false;
       btn.classList.add("float-animation");
 
-      // Prepare Description
       let description = "Body Risk Score:";
-      const selections = ["Biological Age/Ageing Rate"]; // Always included
+      const selections = ["Biological Age/Ageing Rate"];
       if (isDHR) selections.push("Diabetes/Heart Risk");
       if (isThyroid) selections.push("Thyroid Risk");
       description += " " + selections.join(" + ");
 
-      // Razorpay Checkout
-      const options = {
-        key: razorpayKey,
-        amount: total * 100,
-        currency: "INR",
-        name: "HealthCheck.ai",
-        description,
-        handler: function (response) {
-          alert("✅ Payment successful!\nPayment ID: " + response.razorpay_payment_id);
-          window.location.href = "/order-confirmation";
-        },
-        prefill: {
-          name: "Test User",
-          email: "test@example.com",
-          contact: "9123456780"
-        },
-        theme: {
-          color: "#0E406B"
+      // Start Cashfree Payment Flow
+      const paymentData = {
+        order_amount: 2000,
+        description: "BioAge + Diabetes Risk Test",
+        customer_details: {
+          customer_id: "44334433",
+          customer_name: "Test User",
+          customer_email: "test@example.com",
+          customer_phone: "9123456780"
         }
       };
+      var paymentSessionID = "";
+// Make POST request to backend API
+fetch("/create/cashfree/order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(paymentData)
+})
 
-      const rzp = new Razorpay(options);
-      rzp.open();
-    }, 700);
+.then(response => {
+  if (!response.ok) throw new Error("Network response was not ok");
+  return response.json();
+  console.log(response);
+})
+.then(data => {
+  if (!data.payment_session_id) {
+    throw new Error("Session ID missing");
+  }
+  console.log(data);
+  paymentSessionID = data.payment_session_id;
+});
+var cashfree = Cashfree({
+  mode: "production"
+});
+
+let checkoutOptions = {
+  paymentSessionId: paymentSessionID,
+  redirectTarget: "_modal",
+};
+
+
+cashfree.checkout(checkoutOptions).then((result) => {
+  if (result.error) {
+        // This will be true whenever user clicks on close icon inside the modal or any error happens during the payment
+        console.log("User has closed the popup or there is some payment error, Check for Payment Status");
+        console.log(result.error);
+      }
+      if (result.redirect) {
+        // This will be true when the payment redirection page couldnt be opened in the same window
+        // This is an exceptional case only when the page is opened inside an inAppBrowser
+        // In this case the customer will be redirected to return url once payment is completed
+        console.log("Payment will be redirected");
+      }
+      if (result.paymentDetails) {
+        // This will be called whenever the payment is completed irrespective of transaction status
+        console.log("Payment has been completed, Check for Payment Status");
+        console.log(result.paymentDetails.paymentMessage);
+      }
+    });
+}, 700);
   });
 
-  // Initialize with Biological Age option pre-selected
-  window.onload = function() {
-    updateTotalPrice();
+  // Preloader and Initialization
+  window.onload = function () {
+    preloadTime = setTimeout(function () {
+      document.getElementById("preloader").style.display = "none";
+      document.querySelector(".package-box").style.display = "block";
+      updateTotalPrice();
+    }, 1000);
   };
-
 </script>
-<script>
-  //Preloder
 
-  window.onload = function() {
-  // Start the preloader
-  preloadTime = setTimeout(function() {
-    // Hide preloader
-    document.getElementById("preloader").style.display = "none";
-    // Show main content (if needed)
-    document.querySelector(".package-box").style.display = "block";
-    
-    // Initialize the page
-    updateTotalPrice();
-  }, 1000);
-};
-//End Preloder
-</script>
 <script src="clean-urls.js"></script>
 
 </body>
